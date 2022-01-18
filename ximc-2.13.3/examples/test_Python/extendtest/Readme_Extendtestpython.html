@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Extendtestpython</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Extendtestpython</strong></big></big></font></td
+></tr></table>
+    <p><tt>This&nbsp;module&nbsp;is&nbsp;an&nbsp;extended&nbsp;example&nbsp;of&nbsp;using&nbsp;the&nbsp;libximc&nbsp;library&nbsp;to&nbsp;control&nbsp;8SMC&nbsp;SERIES&nbsp;using&nbsp;the&nbsp;Python&nbsp;language.<br>
+&nbsp;<br>
+Warning:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;keyboard&nbsp;module&nbsp;tracks&nbsp;clicks&nbsp;even&nbsp;if&nbsp;the&nbsp;window&nbsp;is&nbsp;not&nbsp;active.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;avoid&nbsp;problems,&nbsp;do&nbsp;not&nbsp;change&nbsp;the&nbsp;focus&nbsp;until&nbsp;you&nbsp;finish&nbsp;working&nbsp;with&nbsp;the&nbsp;example.<br>
+&nbsp;<br>
+#&nbsp;Dependences<br>
+&nbsp;&nbsp;-Necessary&nbsp;Python&nbsp;packages:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;netifaces<br>
+&nbsp;&nbsp;&nbsp;&nbsp;getpass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;keyboard<br>
+&nbsp;&nbsp;&nbsp;&nbsp;getch&nbsp;for&nbsp;linux&nbsp;and&nbsp;macos,&nbsp;if&nbsp;the&nbsp;package&nbsp;keyboard&nbsp;is&nbsp;blocked&nbsp;due&nbsp;to&nbsp;lack&nbsp;of&nbsp;root&nbsp;user&nbsp;rights.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pyximc.py&nbsp;for&nbsp;correct&nbsp;usage&nbsp;of&nbsp;the&nbsp;library&nbsp;libximc&nbsp;you&nbsp;need&nbsp;to&nbsp;add&nbsp;the&nbsp;file&nbsp;&nbsp;wrapper&nbsp;with&nbsp;the&nbsp;structures&nbsp;of&nbsp;the&nbsp;library&nbsp;to&nbsp;python&nbsp;path.<br>
+&nbsp;<br>
+&nbsp;&nbsp;-To&nbsp;search&nbsp;for&nbsp;network&nbsp;devices,&nbsp;you&nbsp;must&nbsp;have&nbsp;a&nbsp;file&nbsp;keyfile.sqlite<br>
+&nbsp;<br>
+&nbsp;&nbsp;-Required&nbsp;libraries&nbsp;for&nbsp;Windows:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bindy.dll<br>
+&nbsp;&nbsp;&nbsp;&nbsp;libximc.dll<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xiwrapper.dll<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;-Required&nbsp;libraries&nbsp;for&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;libbindy.so<br>
+&nbsp;&nbsp;&nbsp;&nbsp;libximc.so<br>
+&nbsp;&nbsp;&nbsp;&nbsp;libxiwrapper.so</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="getpass.html">getpass</a><br>
+<a href="keyboard.html">keyboard</a><br>
+</td><td width="25%" valign=top><a href="netifaces.html">netifaces</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="platform.html">platform</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+<a href="ctypes.wintypes.html">ctypes.wintypes</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">
+ <dl><dt><a name="-device_actions_dialog"><strong>device_actions_dialog</strong></a>(lib, device_id)</dt><dd><tt>The&nbsp;main&nbsp;Manager&nbsp;of&nbsp;the&nbsp;example.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+&nbsp;<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.</tt></dd></dl>
+ <dl><dt><a name="-device_movement_actions_dialog"><strong>device_movement_actions_dialog</strong></a>(lib, device_id, mode=1)</dt><dd><tt>The&nbsp;Manager&nbsp;motion&nbsp;control.<br>
+&nbsp;<br>
+Allows&nbsp;you&nbsp;to&nbsp;move&nbsp;both&nbsp;in&nbsp;feedback&nbsp;counts&nbsp;and&nbsp;in&nbsp;user&nbsp;units.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;mode:&nbsp;data&nbsp;mode&nbsp;in&nbsp;feedback&nbsp;counts&nbsp;or&nbsp;in&nbsp;user&nbsp;units.&nbsp;(Default&nbsp;value&nbsp;=&nbsp;1)<br>
+&nbsp;<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.</tt></dd></dl>
+ <dl><dt><a name="-device_selection_dialog"><strong>device_selection_dialog</strong></a>()</dt><dd><tt>Device&nbsp;selection&nbsp;Manager.<br>
+&nbsp;<br>
+Set&nbsp;bindy&nbsp;(network)&nbsp;keyfile.&nbsp;Must&nbsp;be&nbsp;called&nbsp;before&nbsp;any&nbsp;call&nbsp;to&nbsp;"enumerate_devices"&nbsp;or&nbsp;"open_device"&nbsp;if&nbsp;you<br>
+wish&nbsp;to&nbsp;use&nbsp;network-attached&nbsp;controllers.&nbsp;Accepts&nbsp;both&nbsp;absolute&nbsp;and&nbsp;relative&nbsp;paths,&nbsp;relative&nbsp;paths&nbsp;are&nbsp;resolved<br>
+relative&nbsp;to&nbsp;the&nbsp;process&nbsp;working&nbsp;directory.&nbsp;If&nbsp;you&nbsp;do&nbsp;not&nbsp;need&nbsp;network&nbsp;devices&nbsp;then&nbsp;"set_bindy_key"&nbsp;is&nbsp;optional.<br>
+In&nbsp;Python&nbsp;make&nbsp;sure&nbsp;to&nbsp;pass&nbsp;byte-array&nbsp;object&nbsp;to&nbsp;this&nbsp;function&nbsp;(b"string&nbsp;literal").<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.</tt></dd></dl>
+ <dl><dt><a name="-flex_wait_for_stop"><strong>flex_wait_for_stop</strong></a>(lib, device_id, msec, mode=1)</dt><dd><tt>This&nbsp;function&nbsp;performs&nbsp;dynamic&nbsp;output&nbsp;coordinate&nbsp;in&nbsp;the&nbsp;process&nbsp;of&nbsp;moving.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;msec:&nbsp;Pause&nbsp;between&nbsp;reading&nbsp;the&nbsp;coordinates.<br>
+:param&nbsp;mode:&nbsp;data&nbsp;mode&nbsp;in&nbsp;feedback&nbsp;counts&nbsp;or&nbsp;in&nbsp;user&nbsp;units.&nbsp;(Default&nbsp;value&nbsp;=&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-get_motor_settings"><strong>get_motor_settings</strong></a>(lib, device_id)</dt><dd><tt>Receiving&nbsp;the&nbsp;configuration&nbsp;of&nbsp;the&nbsp;motor.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-get_stage_information"><strong>get_stage_information</strong></a>(lib, device_id)</dt><dd><tt>Read&nbsp;information&nbsp;from&nbsp;the&nbsp;EEPROM&nbsp;of&nbsp;the&nbsp;progress&nbsp;bar&nbsp;if&nbsp;it&nbsp;is&nbsp;installed.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-get_status"><strong>get_status</strong></a>(lib, device_id)</dt><dd><tt>A&nbsp;function&nbsp;of&nbsp;reading&nbsp;status&nbsp;information&nbsp;from&nbsp;the&nbsp;device<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;use&nbsp;this&nbsp;function&nbsp;to&nbsp;get&nbsp;basic&nbsp;information&nbsp;about&nbsp;the&nbsp;device&nbsp;status.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-getch"><strong>getch</strong></a>()</dt><dd><tt>Select&nbsp;the&nbsp;type&nbsp;of&nbsp;keyboard&nbsp;processing&nbsp;depending&nbsp;on&nbsp;your&nbsp;rights.</tt></dd></dl>
+ <dl><dt><a name="-getch_new"><strong>getch_new</strong></a>()</dt><dd><tt>Processing&nbsp;keystrokes&nbsp;by&nbsp;scancode.&nbsp;Provides&nbsp;work&nbsp;independent&nbsp;of&nbsp;the&nbsp;national&nbsp;layout.</tt></dd></dl>
+ <dl><dt><a name="-gl_settings"><strong>gl_settings</strong></a>(lib, device_id)</dt><dd><tt>Manager&nbsp;of&nbsp;the&nbsp;controller&nbsp;settings.<br>
+&nbsp;<br>
+This&nbsp;function,&nbsp;among&nbsp;other&nbsp;settings,&nbsp;allows&nbsp;you&nbsp;to&nbsp;load&nbsp;the&nbsp;coordinate&nbsp;correction&nbsp;table.<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+&nbsp;<br>
+note:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;device_id&nbsp;parameter&nbsp;in&nbsp;this&nbsp;function&nbsp;is&nbsp;a&nbsp;C&nbsp;pointer,&nbsp;unlike&nbsp;most&nbsp;library&nbsp;functions&nbsp;that&nbsp;use&nbsp;this&nbsp;parameter</tt></dd></dl>
+ <dl><dt><a name="-input_flags"><strong>input_flags</strong></a>(flags, names_flags)</dt><dd><tt>Function&nbsp;for&nbsp;entering&nbsp;flag&nbsp;values.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-input_new"><strong>input_new</strong></a>(s='')</dt><dd><tt>Wrapper&nbsp;for&nbsp;the&nbsp;data&nbsp;entry&nbsp;function.<br>
+&nbsp;<br>
+:param&nbsp;s:&nbsp;&nbsp;Description&nbsp;of&nbsp;the&nbsp;input&nbsp;value(Default&nbsp;value&nbsp;=&nbsp;"")</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt><dd><tt>Main&nbsp;function&nbsp;of&nbsp;the&nbsp;example<br>
+&nbsp;<br>
+Main&nbsp;function&nbsp;opens&nbsp;the&nbsp;device&nbsp;search&nbsp;Manager.<br>
+You&nbsp;connect&nbsp;to&nbsp;the&nbsp;selected&nbsp;device,&nbsp;work&nbsp;with&nbsp;it,&nbsp;and&nbsp;disconnect&nbsp;from&nbsp;the&nbsp;device&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;program.<br>
+&nbsp;<br>
+note:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;device_id&nbsp;parameter&nbsp;in&nbsp;function&nbsp;close_device()&nbsp;is&nbsp;a&nbsp;C&nbsp;pointer,&nbsp;unlike&nbsp;most&nbsp;library&nbsp;functions&nbsp;that&nbsp;use&nbsp;this&nbsp;parameter<br>
+&nbsp;<br>
+Starts&nbsp;Manager&nbsp;search&nbsp;for&nbsp;devices&nbsp;and&nbsp;the&nbsp;General&nbsp;Manager&nbsp;work&nbsp;with&nbsp;the&nbsp;device.</tt></dd></dl>
+ <dl><dt><a name="-motor_settings"><strong>motor_settings</strong></a>(lib, device_id)</dt><dd><tt>:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_edges_settings"><strong>test_edges_settings</strong></a>(lib, device_id)</dt><dd><tt>View&nbsp;and&nbsp;configure&nbsp;the&nbsp;limit&nbsp;switch&nbsp;mode.<br>
+&nbsp;<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_eeprom"><strong>test_eeprom</strong></a>(lib, device_id)</dt><dd><tt>Checks&nbsp;for&nbsp;the&nbsp;presence&nbsp;of&nbsp;EEPROM.&nbsp;If&nbsp;it&nbsp;is&nbsp;present,&nbsp;it&nbsp;displays&nbsp;information.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_extio"><strong>test_extio</strong></a>(lib, device_id)</dt><dd><tt>External&nbsp;input&nbsp;/&nbsp;output&nbsp;settings&nbsp;Manager.<br>
+&nbsp;<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_feedback_settings"><strong>test_feedback_settings</strong></a>(lib, device_id)</dt><dd><tt>View&nbsp;and&nbsp;change&nbsp;the&nbsp;feedback&nbsp;mode.<br>
+&nbsp;<br>
+To&nbsp;manage&nbsp;feedback,&nbsp;follow&nbsp;the&nbsp;prompts&nbsp;on&nbsp;the&nbsp;screen.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_get_move_settings"><strong>test_get_move_settings</strong></a>(lib, device_id, mvst, mode=1)</dt><dd><tt>Read&nbsp;the&nbsp;move&nbsp;settings.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;mvst:&nbsp;the&nbsp;structure&nbsp;with&nbsp;parameters&nbsp;of&nbsp;movement.<br>
+:param&nbsp;mode:&nbsp;data&nbsp;mode&nbsp;in&nbsp;feedback&nbsp;counts&nbsp;or&nbsp;in&nbsp;user&nbsp;units.&nbsp;(Default&nbsp;value&nbsp;=&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-test_get_position"><strong>test_get_position</strong></a>(lib, device_id, mode=1)</dt><dd><tt>Obtaining&nbsp;information&nbsp;about&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;positioner.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;allows&nbsp;you&nbsp;to&nbsp;get&nbsp;information&nbsp;about&nbsp;the&nbsp;current&nbsp;positioner&nbsp;coordinates,<br>
+both&nbsp;in&nbsp;steps&nbsp;and&nbsp;in&nbsp;encoder&nbsp;counts,&nbsp;if&nbsp;it&nbsp;is&nbsp;set.<br>
+Also,&nbsp;depending&nbsp;on&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;mode&nbsp;parameter,&nbsp;information&nbsp;can&nbsp;be&nbsp;obtained&nbsp;in&nbsp;user&nbsp;units.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;mode:&nbsp;mode&nbsp;in&nbsp;feedback&nbsp;counts&nbsp;or&nbsp;in&nbsp;user&nbsp;units.&nbsp;(Default&nbsp;value&nbsp;=&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-test_info"><strong>test_info</strong></a>(lib, device_id)</dt><dd><tt>Reading&nbsp;information&nbsp;about&nbsp;the&nbsp;device.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_left"><strong>test_left</strong></a>(lib, device_id)</dt><dd><tt>Move&nbsp;to&nbsp;the&nbsp;left.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_microstep_mode"><strong>test_microstep_mode</strong></a>(lib, device_id)</dt><dd><tt>Setting&nbsp;the&nbsp;microstep&nbsp;mode.&nbsp;Works&nbsp;only&nbsp;for&nbsp;stepper&nbsp;motors<br>
+&nbsp;<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_move"><strong>test_move</strong></a>(lib, device_id, distance, udistance, mode=1)</dt><dd><tt>Move&nbsp;to&nbsp;the&nbsp;specified&nbsp;coordinate.<br>
+&nbsp;<br>
+Depending&nbsp;on&nbsp;the&nbsp;mode&nbsp;parameter,&nbsp;you&nbsp;can&nbsp;set&nbsp;coordinates&nbsp;in&nbsp;steps&nbsp;or&nbsp;feedback&nbsp;counts,&nbsp;or&nbsp;in&nbsp;custom&nbsp;units.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;distance:&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;destination.<br>
+:param&nbsp;udistance:&nbsp;destination&nbsp;position&nbsp;in&nbsp;micro&nbsp;steps&nbsp;if&nbsp;this&nbsp;mode&nbsp;is&nbsp;used.<br>
+:param&nbsp;mode:&nbsp;&nbsp;mode&nbsp;in&nbsp;feedback&nbsp;counts&nbsp;or&nbsp;in&nbsp;user&nbsp;units.&nbsp;(Default&nbsp;value&nbsp;=&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-test_move_settings"><strong>test_move_settings</strong></a>(lib, device_id, mode=1)</dt><dd><tt>Setting&nbsp;up&nbsp;movement&nbsp;parameters.<br>
+&nbsp;<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;mode:&nbsp;data&nbsp;mode&nbsp;in&nbsp;feedback&nbsp;counts&nbsp;or&nbsp;in&nbsp;user&nbsp;units.&nbsp;(Default&nbsp;value&nbsp;=&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-test_movr"><strong>test_movr</strong></a>(lib, device_id, distance, udistance, mode=1)</dt><dd><tt>The&nbsp;shift&nbsp;by&nbsp;the&nbsp;specified&nbsp;offset&nbsp;coordinates.<br>
+&nbsp;<br>
+Depending&nbsp;on&nbsp;the&nbsp;mode&nbsp;parameter,&nbsp;you&nbsp;can&nbsp;set&nbsp;coordinates&nbsp;in&nbsp;steps&nbsp;or&nbsp;feedback&nbsp;counts,&nbsp;or&nbsp;in&nbsp;custom&nbsp;units.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;distance:&nbsp;size&nbsp;of&nbsp;the&nbsp;offset&nbsp;in&nbsp;steps.<br>
+:param&nbsp;udistance:&nbsp;Size&nbsp;of&nbsp;the&nbsp;offset&nbsp;in&nbsp;micro&nbsp;steps.<br>
+:param&nbsp;mode:&nbsp;&nbsp;(Default&nbsp;value&nbsp;=&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-test_right"><strong>test_right</strong></a>(lib, device_id)</dt><dd><tt>Move&nbsp;to&nbsp;the&nbsp;right.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_serial"><strong>test_serial</strong></a>(lib, device_id)</dt><dd><tt>Reading&nbsp;the&nbsp;device's&nbsp;serial&nbsp;number.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_set_move_settings"><strong>test_set_move_settings</strong></a>(lib, device_id, mvst, mode=1)</dt><dd><tt>Write&nbsp;the&nbsp;move&nbsp;settings.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;mvst:&nbsp;the&nbsp;structure&nbsp;with&nbsp;parameters&nbsp;of&nbsp;movement.<br>
+:param&nbsp;mode:&nbsp;data&nbsp;mode&nbsp;in&nbsp;feedback&nbsp;counts&nbsp;or&nbsp;in&nbsp;user&nbsp;units.&nbsp;(Default&nbsp;value&nbsp;=&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-test_status"><strong>test_status</strong></a>(lib, device_id)</dt><dd><tt>A&nbsp;function&nbsp;of&nbsp;reading&nbsp;status&nbsp;information&nbsp;from&nbsp;the&nbsp;device<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;use&nbsp;this&nbsp;function&nbsp;to&nbsp;get&nbsp;basic&nbsp;information&nbsp;about&nbsp;the&nbsp;device&nbsp;status.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_sync_settings"><strong>test_sync_settings</strong></a>(lib, device_id)</dt></dl>
+ <dl><dt><a name="-test_user_unit_mode"><strong>test_user_unit_mode</strong></a>(lib, device_id)</dt><dd><tt>User&nbsp;unit&nbsp;mode&nbsp;settings<br>
+&nbsp;<br>
+After&nbsp;setting&nbsp;this&nbsp;multiplier,&nbsp;you&nbsp;can&nbsp;use&nbsp;special&nbsp;commands&nbsp;with&nbsp;the&nbsp;suffix&nbsp;_calb&nbsp;to&nbsp;set&nbsp;the&nbsp;movement&nbsp;in&nbsp;mm&nbsp;or&nbsp;degrees.<br>
+Follow&nbsp;the&nbsp;on-screen&nbsp;instructions&nbsp;to&nbsp;change&nbsp;the&nbsp;settings.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-test_wait_for_stop"><strong>test_wait_for_stop</strong></a>(lib, device_id, interval)</dt><dd><tt>Waiting&nbsp;for&nbsp;the&nbsp;movement&nbsp;to&nbsp;complete.<br>
+&nbsp;<br>
+:param&nbsp;lib:&nbsp;structure&nbsp;for&nbsp;accessing&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;libximc&nbsp;library.<br>
+:param&nbsp;device_id:&nbsp;device&nbsp;id.<br>
+:param&nbsp;interval:&nbsp;step&nbsp;of&nbsp;the&nbsp;check&nbsp;time&nbsp;in&nbsp;milliseconds.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>DEFAULT_MODE</strong> = 0<br>
+<strong>GetLastError</strong> = &lt;_FuncPtr object&gt;<br>
+<strong>RTLD_GLOBAL</strong> = 0<br>
+<strong>RTLD_LOCAL</strong> = 0<br>
+<strong>arch_dir</strong> = 'win32'<br>
+<strong>cdll</strong> = &lt;ctypes.LibraryLoader object&gt;<br>
+<strong>cur_dir</strong> = r'\ximc-2.12.x\examples\test_Python'<br>
+<strong>eng</strong> = &lt;pyximc.engine_settings_t object&gt;<br>
+<strong>key_esc</strong> = 'esc'<br>
+<strong>lib</strong> = &lt;WinDLL 'libximc.dll', handle 10000000&gt;<br>
+<strong>libdir</strong> = r'\ximc-2.12.x\examples\test_Python\..\..\ximc\win32'<br>
+<strong>memmove</strong> = &lt;CFunctionType object&gt;<br>
+<strong>memset</strong> = &lt;CFunctionType object&gt;<br>
+<strong>oledll</strong> = &lt;ctypes.LibraryLoader object&gt;<br>
+<strong>pydll</strong> = &lt;ctypes.LibraryLoader object&gt;<br>
+<strong>pythonapi</strong> = &lt;PyDLL 'python dll', handle f040000&gt;<br>
+<strong>user_name</strong> = 'root'<br>
+<strong>user_unit</strong> = &lt;pyximc.calibration_t object&gt;<br>
+<strong>windll</strong> = &lt;ctypes.LibraryLoader object&gt;<br>
+<strong>ximc_dir</strong> = r'\ximc-2.12.x\examples\test_Python\..\..\ximc'<br>
+<strong>ximc_package_dir</strong> = r'\ximc-2.12.x\examples\test_Python\..\..\ximc\crossplatform\wrappers\python'</td></tr></table>
+</body></html>
