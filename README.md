@@ -1,4 +1,4 @@
-Software for the STUF Project.
+~Software for the STUF Project~
 
 This repository contains the software used for controlling the following hardware:
  - Laser Driven Light Source (LDLS)
