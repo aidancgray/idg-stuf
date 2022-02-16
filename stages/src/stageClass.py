@@ -12,6 +12,7 @@ import math
 from ctypes import *
 
 cur_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+os.chdir(cur_dir)
 ximcDir = (f'{cur_dir}/ximc-2.13.3/ximc')
 ximcPackageDir = os.path.join(ximcDir, "crossplatform", "wrappers", "python")
 sys.path.append(ximcPackageDir)
